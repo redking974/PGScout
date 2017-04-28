@@ -15,7 +15,7 @@ from pgscout.utils import jitter_location, TooManyLoginAttempts, has_captcha, ca
 log = logging.getLogger(__name__)
 
 
-class ScoutAccount(object):
+class Scout(object):
     def __init__(self, auth, username, password, job_queue):
         self.auth = auth
         self.username = username

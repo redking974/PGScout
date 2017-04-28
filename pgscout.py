@@ -5,7 +5,7 @@ from threading import Thread
 
 from flask import Flask, request, jsonify
 
-from pgscout.ScoutAccount import ScoutAccount
+from pgscout.Scout import Scout
 from pgscout.ScoutJob import ScoutJob
 from pgscout.cache import get_cached_encounter, cache_encounter
 from pgscout.config import cfg_get
@@ -69,7 +69,7 @@ with open(cfg_get('accounts_file'), 'r') as f:
     for num, line in enumerate(f, 1):
         fields = line.split(",")
         fields = map(str.strip, fields)
-        scout = ScoutAccount(fields[0], fields[1], fields[2], jobs)
+        scout = Scout(fields[0], fields[1], fields[2], jobs)
         scouts.append(scout)
         t = Thread(target=scout.run, name="s_{}".format(scout.username))
         t.daemon = True
