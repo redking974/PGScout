@@ -106,8 +106,8 @@ class ScoutAccount(object):
             'scout_level': scout_level,
             'encountered_time': time.time()
         }
-        log.info(u"Scout {} (lvl {}) found level {} {} with CP {}.".format(self.username, scout_level, pokemon_level,
-                                                                           pokemon_name, cp))
+        log.info(u"Found a {:.1f}% lvl {} {} with {} CP (scout level {}).".format(iv, pokemon_level,
+                                                                                  pokemon_name, cp, scout_level))
         return response
 
     def check_login(self):
