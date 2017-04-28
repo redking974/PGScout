@@ -44,7 +44,7 @@ class Scout(object):
         return request_pause - (time.time() - self.last_request)
 
     def scout_by_encounter_id(self, job):
-        log.info(u"Scouting a {} at {}, {} with account {}".format(job.pokemon_name, job.lat, job.lng, self.username))
+        log.info(u"Scouting a {} at {}, {}".format(job.pokemon_name, job.lat, job.lng))
         step_location = jitter_location([job.lat, job.lng, 42])
 
         self.api.set_position(*step_location)
