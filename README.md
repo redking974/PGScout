@@ -31,12 +31,12 @@ PGScout accepts **HTTP GET** requests at `http://<your host>:<port>/iv` and need
 * `latitude`
 * `longitude`
 
-An example request looks like this:
+An example **request** looks like this:
 ```
 http://localhost:4242/iv?pokemon_id=70&encounter_id=MTY4MjU4OTY4Njg2MjExOTUwNA%3D%3D&spawn_point_id=47bf32c2c4d&latitude=51.124696678951&longitude=6.89885987319504
 ```
 
-The response is JSON formatted and looks like this:
+The **response** is JSON formatted and looks like this:
 ```javascript
 {
   "success": true,
@@ -66,6 +66,16 @@ Most fields of the response should be self-explanatory.
 * `rating_attack` and `rating_defense`: The moveset rating according to [GamePress](https://pokemongo.gamepress.gg) for attack and defense. If the moveset has no rating the field will contain a dash: "-"
 * `level`: The Pokémon level which is being represented by the arc in the Pokémon details in the game. Wild Pokémon will have a level that is limited by the trainer level but not larger than 30, so a trainer with level 17 may find Pokémon from level 1 to 17 but a level 34 trainer may only find Pokémon from level 1 to 30. So 30 is the absolute maximum for wild Pokémon. *(Note that Pokémon being hatched from eggs have an upper limit of level 20.)*
 * `catch_prob_1` to `catch_prob_3`: These are the catch probabilities for a regular Pokéball (1), a Great Ball (2) and an Ultra Ball (3). The higher the number the higher the chance to catch the Pokémon with the corresponding ball for a regular hit. Maximum is 1.0 which corresponds to 100% catch probability, so you **will** catch the Pokémon however you hit it.
+* `scout_level`: The trainer level of the scout account being used.
+
+# Reliability
+PGScout detects your scout account trainer level and therefore knows which values are reliable and sets the others to `null`. Reliable means that the value is the same for all other trainers of the same or higher level.
+ 
+If your trainer level is **below 25**, only `gender`, `height` and `weight` are reliable.
+
+If your trainer level is **at least 25**, the IV values and moves are also reliable.
+
+If your trainer level is **at least 30**, also CP, Pokemon level and catch probabilities are reliable.
 
 # Errors
 If PGScout encounters an error, the response will look something like this:
